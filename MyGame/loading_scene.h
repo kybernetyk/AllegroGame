@@ -10,9 +10,10 @@
 #define __MyGame__loading_scene__
 
 #include <functional>
+#include "scene_manager.h"
 
 namespace loading_scene {
-	void do_loading_scene(double dt);
+	scene_manager::scene create();	
 }
 
 #endif /* defined(__MyGame__loading_scene__) */

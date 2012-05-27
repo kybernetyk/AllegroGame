@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		35CB1EDB1572D1C2005ABBD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */; };
 		35CB1EE51572D1C2005ABBD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35CB1EE31572D1C2005ABBD9 /* InfoPlist.strings */; };
-		35CB1EE71572D1C2005ABBD9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1EE61572D1C2005ABBD9 /* main.mm */; };
+		35CB1EE71572D1C2005ABBD9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1EE61572D1C2005ABBD9 /* main.cpp */; };
 		35CB1EEB1572D1C2005ABBD9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 35CB1EE91572D1C2005ABBD9 /* Credits.rtf */; };
 		35CB1F001572D27C005ABBD9 /* Allegro-5.0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1EF61572D27C005ABBD9 /* Allegro-5.0.framework */; };
 		35CB1F011572D27C005ABBD9 /* AllegroAcodec-5.0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1EF71572D27C005ABBD9 /* AllegroAcodec-5.0.framework */; };
@@ -66,7 +66,7 @@
 		35CB1EDF1572D1C2005ABBD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		35CB1EE21572D1C2005ABBD9 /* MyGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyGame-Info.plist"; sourceTree = "<group>"; };
 		35CB1EE41572D1C2005ABBD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		35CB1EE61572D1C2005ABBD9 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		35CB1EE61572D1C2005ABBD9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		35CB1EE81572D1C2005ABBD9 /* MyGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyGame-Prefix.pch"; sourceTree = "<group>"; };
 		35CB1EEA1572D1C2005ABBD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		35CB1EF61572D27C005ABBD9 /* Allegro-5.0.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Allegro-5.0.framework"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/Library/Frameworks/Allegro-5.0.framework"; sourceTree = DEVELOPER_DIR; };
@@ -159,6 +159,7 @@
 		35CB1EE01572D1C2005ABBD9 /* MyGame */ = {
 			isa = PBXGroup;
 			children = (
+				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
 				35CB1F191572D85E005ABBD9 /* Loading Scene */,
 				35CB1EE11572D1C2005ABBD9 /* Supporting Files */,
 				35CB1F161572D63B005ABBD9 /* scene_manager.cpp */,
@@ -172,7 +173,6 @@
 			children = (
 				35CB1EE21572D1C2005ABBD9 /* MyGame-Info.plist */,
 				35CB1EE31572D1C2005ABBD9 /* InfoPlist.strings */,
-				35CB1EE61572D1C2005ABBD9 /* main.mm */,
 				35CB1EE81572D1C2005ABBD9 /* MyGame-Prefix.pch */,
 				35CB1EE91572D1C2005ABBD9 /* Credits.rtf */,
 			);
@@ -251,7 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35CB1EE71572D1C2005ABBD9 /* main.mm in Sources */,
+				35CB1EE71572D1C2005ABBD9 /* main.cpp in Sources */,
 				35CB1F181572D63B005ABBD9 /* scene_manager.cpp in Sources */,
 				35CB1F1C1572D86B005ABBD9 /* loading_scene.cpp in Sources */,
 			);

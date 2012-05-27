@@ -9,21 +9,26 @@
 #include "scene_manager.h"
 
 namespace scene_manager {
+	static scene next_scene;
+	static scene current_scene;
 
-	static std::function<void(double)> current_scene = nullptr;
-	static std::function<void(double)> next_scene = nullptr;
-
-	void set_scene(std::function<void(double)> scene) {
+	void set_scene(scene scene) {
 		next_scene = scene;
 	}
 
-	void run_scene(double dt) {
-		if (current_scene != nullptr)
-			current_scene(dt);
+	void run(double dt) {
+		if (current_scene.run_scene != nullptr)
+			current_scene.run_scene(dt);
 		
-		if (next_scene) {
+		if (current_scene.draw_scene)
+			current_scene.draw_scene(dt);
+		
+		if (next_scene.run_scene != nullptr) {
 			current_scene = next_scene;
-			next_scene = nullptr;
+			next_scene.run_scene = nullptr;
+			
+			if (current_scene.init_scene)
+				current_scene.init_scene(); 
 		}
 	}
 }
