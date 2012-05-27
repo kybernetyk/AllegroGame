@@ -17,19 +17,19 @@ namespace scene_manager {
 	}
 
 	void run(double dt) {
-		if (current_scene.run_scene != nullptr)
-			current_scene.run_scene(dt);
+		if (current_scene.tick_scene != nullptr)
+			current_scene.tick_scene(dt);
 		
 		if (current_scene.draw_scene)
 			current_scene.draw_scene(dt);
 		
 		//change to scene which was set in set_scene
-		if (next_scene.run_scene != nullptr) {
+		if (next_scene.tick_scene != nullptr) {
 			if (current_scene.destroy_scene)
 				current_scene.destroy_scene();
 			
 			current_scene = next_scene;
-			next_scene.run_scene = nullptr;
+			next_scene.tick_scene = nullptr;
 			
 			if (current_scene.init_scene)
 				current_scene.init_scene(); 

@@ -16,7 +16,7 @@ namespace scene_manager {
 	struct scene {
 		std::function<void()> init_scene = nullptr;
 		std::function<void()> destroy_scene = nullptr;
-		std::function<void(double)> run_scene = nullptr;
+		std::function<void(double)> tick_scene = nullptr;
 		std::function<void(double)> draw_scene = nullptr;
 	};
 	

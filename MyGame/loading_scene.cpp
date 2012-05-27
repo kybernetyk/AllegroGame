@@ -8,6 +8,7 @@
 
 #include "loading_scene.h"
 #include "scene_manager.h"
+#include "menu_scene.h"
 
 namespace loading_scene {
 	
@@ -19,21 +20,23 @@ namespace loading_scene {
 	static void do_scene(double dt) {
 		printf("loading ... %i\n", count);
 		if (count++ >= 5) {
+			/*
 			scene_manager::scene s;
 			
 			s.init_scene = []() {
 				printf("scene init!\n");
 			};
 			
-			s.run_scene = [](double dt) {
+			s.tick_scene = [](double dt) {
 				printf("opfer! %f\n", dt);
 			};
 			
 			s.draw_scene = [](double dt) {
 				printf("draw: %f\n", dt);
 			};
+			 */
 			
-			scene_manager::set_scene(s);
+			scene_manager::set_scene(menu_scene::create());
 			
 		}
 	}
@@ -44,7 +47,7 @@ namespace loading_scene {
 	scene_manager::scene create() {
 		scene_manager::scene scene;
 		scene.init_scene = init_scene;
-		scene.run_scene = do_scene;
+		scene.tick_scene = do_scene;
 		scene.draw_scene = draw;
 		return scene;
 	}

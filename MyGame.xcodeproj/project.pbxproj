@@ -34,6 +34,7 @@
 		35CB1F151572D3CF005ABBD9 /* liballegro_main.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1F141572D3CF005ABBD9 /* liballegro_main.dylib */; };
 		35CB1F181572D63B005ABBD9 /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1F161572D63B005ABBD9 /* scene_manager.cpp */; };
 		35CB1F1C1572D86B005ABBD9 /* loading_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1F1A1572D86B005ABBD9 /* loading_scene.cpp */; };
+		35CB1F201572DE34005ABBD9 /* menu_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1F1E1572DE34005ABBD9 /* menu_scene.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +85,8 @@
 		35CB1F171572D63B005ABBD9 /* scene_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene_manager.h; sourceTree = "<group>"; };
 		35CB1F1A1572D86B005ABBD9 /* loading_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loading_scene.cpp; sourceTree = "<group>"; };
 		35CB1F1B1572D86B005ABBD9 /* loading_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loading_scene.h; sourceTree = "<group>"; };
+		35CB1F1E1572DE34005ABBD9 /* menu_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = menu_scene.cpp; sourceTree = "<group>"; };
+		35CB1F1F1572DE34005ABBD9 /* menu_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = menu_scene.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,7 @@
 		35CB1EE01572D1C2005ABBD9 /* MyGame */ = {
 			isa = PBXGroup;
 			children = (
+				35CB1F1D1572DE22005ABBD9 /* Menu Scene */,
 				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
 				35CB1F191572D85E005ABBD9 /* Loading Scene */,
 				35CB1EE11572D1C2005ABBD9 /* Supporting Files */,
@@ -186,6 +190,15 @@
 				35CB1F1B1572D86B005ABBD9 /* loading_scene.h */,
 			);
 			name = "Loading Scene";
+			sourceTree = "<group>";
+		};
+		35CB1F1D1572DE22005ABBD9 /* Menu Scene */ = {
+			isa = PBXGroup;
+			children = (
+				35CB1F1E1572DE34005ABBD9 /* menu_scene.cpp */,
+				35CB1F1F1572DE34005ABBD9 /* menu_scene.h */,
+			);
+			name = "Menu Scene";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +267,7 @@
 				35CB1EE71572D1C2005ABBD9 /* main.cpp in Sources */,
 				35CB1F181572D63B005ABBD9 /* scene_manager.cpp in Sources */,
 				35CB1F1C1572D86B005ABBD9 /* loading_scene.cpp in Sources */,
+				35CB1F201572DE34005ABBD9 /* menu_scene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
