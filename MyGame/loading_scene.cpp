@@ -11,15 +11,16 @@
 #include "menu_scene.h"
 
 namespace loading_scene {
+	static int progress = 0;
 	
 	static void init_scene() {
 		printf("initing ...\n");
+		progress = 0;
 	}
 	
-	static int count = 0;
 	static void do_scene(double dt) {
-		printf("loading ... %i\n", count);
-		if (count++ >= 5) {
+		printf("loading progress: %i\n", progress);
+		if (progress++ >= 100) {
 			/*
 			scene_manager::scene s;
 			
