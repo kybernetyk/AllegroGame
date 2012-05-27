@@ -163,11 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				35CB1F1D1572DE22005ABBD9 /* Menu Scene */,
-				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
 				35CB1F191572D85E005ABBD9 /* Loading Scene */,
 				35CB1EE11572D1C2005ABBD9 /* Supporting Files */,
 				35CB1F161572D63B005ABBD9 /* scene_manager.cpp */,
 				35CB1F171572D63B005ABBD9 /* scene_manager.h */,
+				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
 			);
 			path = MyGame;
 			sourceTree = "<group>";

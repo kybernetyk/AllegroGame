@@ -20,7 +20,7 @@ namespace loading_scene {
 	
 	static void do_scene(double dt) {
 		printf("loading progress: %i\n", progress);
-		if (progress++ >= 100) {
+		if (progress++ >= 10) {
 			/*
 			scene_manager::scene s;
 			
