@@ -7,8 +7,12 @@
 //
 
 #include "menu_scene.h"
+#include "camera.h"
 #include <vector>
 #include <memory>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
 
 namespace menu_scene {
 	
@@ -18,7 +22,8 @@ namespace menu_scene {
 	 struct should be enough. */
 	struct state_t {
 		int foo = 0;
-		
+		ALLEGRO_BITMAP *bmp;
+
 		~state_t() {
 			printf("state_t destroyed\n");
 		}
@@ -35,6 +40,11 @@ namespace menu_scene {
 	static void init(size_t state_id) {
 		auto state = states[state_id];
 		state->foo = 2;
+		
+		state->bmp = al_load_bitmap("arma.png");
+		if (!state->bmp) {
+			fprintf(stderr, "couldn't load arma.png!\n");
+		}
 	}
 
 	static void destroy(size_t state_id) {
@@ -49,21 +59,35 @@ namespace menu_scene {
 	static void tick(double dt, size_t state_id) {
 		auto state = states[state_id];
 		
-		printf("menu scene tick: %f = %i\n", dt, state->foo);
+		//calculate our world
 		state->foo++;
-		
-		if (state->foo > 40) {
-			scene_manager::scene scene;
-			scene.tick_scene = [](double dt) {
-				printf("dummy\n");
-			};
-			scene_manager::set_scene(scene);
-		}
+		printf("menu scene tick: %f = %i\n", dt, state->foo);
+		camera::translate_by(0.5, 0.5);
+//		if (state->foo > 40) {
+//			scene_manager::scene scene;
+//			scene.tick_scene = [](double dt) {
+//				printf("dummy\n");
+//			};
+//			scene_manager::set_scene(scene);
+//		}
 	}
 	
 	static void draw(double dt, size_t state_id) {
 		auto state = states[state_id];
 		printf("drawing with foo %i\n", state->foo);
+
+		camera::apply();		
+		ALLEGRO_COLOR col = {.r = 255};
+		
+		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
+		col.g = 255;
+		
+		al_draw_filled_rounded_rectangle(300, 300, 340, 340, 8, 8, col);
+		al_draw_bitmap(state->bmp, 200, 200, 0);
+		
+		ALLEGRO_TRANSFORM T;
+		al_identity_transform(&T);
+		al_use_transform(&T);
 	}
 	
 	

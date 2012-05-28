@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		353B6CA515735F6300D0517A /* arma.png in Resources */ = {isa = PBXBuildFile; fileRef = 353B6CA415735F6300D0517A /* arma.png */; };
+		353B6CAA1573708A00D0517A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 353B6CA81573708A00D0517A /* camera.cpp */; };
 		35CB1EDB1572D1C2005ABBD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */; };
 		35CB1EE51572D1C2005ABBD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35CB1EE31572D1C2005ABBD9 /* InfoPlist.strings */; };
 		35CB1EE71572D1C2005ABBD9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1EE61572D1C2005ABBD9 /* main.cpp */; };
@@ -60,6 +62,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		353B6CA415735F6300D0517A /* arma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arma.png; path = MyGame/arma.png; sourceTree = "<group>"; };
+		353B6CA81573708A00D0517A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		353B6CA91573708A00D0517A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		35CB1ED61572D1C2005ABBD9 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		35CB1EDD1572D1C2005ABBD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -112,9 +117,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		353B6CA71573707200D0517A /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				353B6CA81573708A00D0517A /* camera.cpp */,
+				353B6CA91573708A00D0517A /* camera.h */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		35CB1EC91572D175005ABBD9 = {
 			isa = PBXGroup;
 			children = (
+				353B6CA415735F6300D0517A /* arma.png */,
 				35CB1F141572D3CF005ABBD9 /* liballegro_main.dylib */,
 				35CB1EE01572D1C2005ABBD9 /* MyGame */,
 				35CB1ED91572D1C2005ABBD9 /* Frameworks */,
@@ -162,6 +177,7 @@
 		35CB1EE01572D1C2005ABBD9 /* MyGame */ = {
 			isa = PBXGroup;
 			children = (
+				353B6CA71573707200D0517A /* Camera */,
 				35CB1F1D1572DE22005ABBD9 /* Menu Scene */,
 				35CB1F191572D85E005ABBD9 /* Loading Scene */,
 				35CB1EE11572D1C2005ABBD9 /* Supporting Files */,
@@ -254,6 +270,7 @@
 			files = (
 				35CB1EE51572D1C2005ABBD9 /* InfoPlist.strings in Resources */,
 				35CB1EEB1572D1C2005ABBD9 /* Credits.rtf in Resources */,
+				353B6CA515735F6300D0517A /* arma.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +285,7 @@
 				35CB1F181572D63B005ABBD9 /* scene_manager.cpp in Sources */,
 				35CB1F1C1572D86B005ABBD9 /* loading_scene.cpp in Sources */,
 				35CB1F201572DE34005ABBD9 /* menu_scene.cpp in Sources */,
+				353B6CAA1573708A00D0517A /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +433,7 @@
 				35CB1EF41572D1C3005ABBD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
