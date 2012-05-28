@@ -17,14 +17,42 @@ namespace menu_scene {
 	 most of the time one static module global state
 	 struct should be enough. */
 	struct state_t {
-		int foo;
-	};
-
-	static void tick(double dt, state_t &state) {
-		printf("menu scene tick: %f = %i\n", dt, state.foo);
-		state.foo++;
+		int foo = 0;
 		
-		if (state.foo > 40) {
+		~state_t() {
+			printf("state_t destroyed\n");
+		}
+	};
+	
+	//we're using a vector of shared_ptrs here. though we could
+	//have used just a vector of state_t removing those
+	//makes it difficult as all ids following the removed
+	//state would be invalid. thus we use a shared_ptr
+	//that we set to nullptr to trigger object destruction
+	std::vector <std::shared_ptr<state_t>> states;
+
+	
+	static void init(size_t state_id) {
+		auto state = states[state_id];
+		state->foo = 2;
+	}
+
+	static void destroy(size_t state_id) {
+		//destroy scene at index i
+		//this will be cumbersome with an vector
+		//maybe get an array with N slots and mark as free
+		//or whatever. states should be pretty small
+		//so we can ignore this.
+		states[state_id] = nullptr;
+	}
+	
+	static void tick(double dt, size_t state_id) {
+		auto state = states[state_id];
+		
+		printf("menu scene tick: %f = %i\n", dt, state->foo);
+		state->foo++;
+		
+		if (state->foo > 40) {
 			scene_manager::scene scene;
 			scene.tick_scene = [](double dt) {
 				printf("dummy\n");
@@ -33,21 +61,36 @@ namespace menu_scene {
 		}
 	}
 	
-	static void destroy() {
-		printf("BAM!\n");
+	static void draw(double dt, size_t state_id) {
+		auto state = states[state_id];
+		printf("drawing with foo %i\n", state->foo);
 	}
-
+	
+	
 	scene_manager::scene create() {
 		scene_manager::scene scene;
 		state_t state;
 		state.foo = 23;
+		states.push_back(std::make_shared<state_t>(state));
+		size_t i = states.size()-1;
 		
-		scene.tick_scene = [state](double dt) mutable {
-			tick(dt, state);
+		scene.init_scene = [i]() {
+			init(i);
 		};
 		
-		scene.destroy_scene = destroy;
-				
+		scene.destroy_scene = [i]() {
+			destroy(i);
+		};
+
+		scene.tick_scene = [i](double dt) {
+			tick(dt, i);
+		};
+		
+		scene.draw_scene = [i](double dt) {
+			draw(dt, i);
+		};
+		
+		
 		return scene;
 	}
 }
