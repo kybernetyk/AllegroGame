@@ -21,7 +21,8 @@ namespace scene_manager {
 	};
 	
 	void set_scene(scene next_scene);
-	void run(double dt);
+	void tick(double dt);
+	void draw(double dt);
 }
 
 #endif /* defined(__MyGame__scene_manager__) */

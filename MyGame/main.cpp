@@ -4,19 +4,32 @@
 #include "scene_manager.h"
 #include "loading_scene.h"
 
-int main(int argc, char **argv){
+
+const float FPS = 60.0f;
+
+
+int main(int argc, char **argv) {
 	
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+	ALLEGRO_TIMER *timer = NULL;
+	bool redraw = true;
 	
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
 	}
 	
+	timer = al_create_timer(1.0 / FPS);
+	if(!timer) {
+		fprintf(stderr, "failed to create timer!\n");
+		return -1;
+	}
+	
 	display = al_create_display(640, 480);
 	if(!display) {
 		fprintf(stderr, "failed to create display!\n");
+		al_destroy_timer(timer);
 		return -1;
 	}
 	
@@ -24,37 +37,43 @@ int main(int argc, char **argv){
 	if(!event_queue) {
 		fprintf(stderr, "failed to create event_queue!\n");
 		al_destroy_display(display);
+		al_destroy_timer(timer);
 		return -1;
 	}
 	
 	al_register_event_source(event_queue, al_get_display_event_source(display));
-	
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_clear_to_color(al_map_rgb(0,0,0));
-	
 	al_flip_display();
 	
 	scene_manager::set_scene(loading_scene::create());
 	
+	al_start_timer(timer);
+	
 	for (;;) {
 		ALLEGRO_EVENT ev;
-		ALLEGRO_TIMEOUT timeout;
-		al_init_timeout(&timeout, 0.06);
+		al_wait_for_event(event_queue, &ev);
 		
-		bool get_event = al_wait_for_event_until(event_queue, &ev, &timeout);
-		
-		if(get_event && ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+		if(ev.type == ALLEGRO_EVENT_TIMER) {
+			redraw = true;
+			scene_manager::tick(1.0/FPS);
+		}
+		else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			break;
 		}
 		
-		al_clear_to_color(al_map_rgb(0,0,0));
-		scene_manager::run(1.0);
-		
-		
-		al_flip_display();
+		if(redraw && al_is_event_queue_empty(event_queue)) {
+			redraw = false;
+			al_clear_to_color(al_map_rgb(0,0,0));
+			scene_manager::draw(1.0/FPS);
+			al_flip_display();
+		}
 	}
 	
+	al_destroy_timer(timer);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
 	
 	return 0;
 }
+
