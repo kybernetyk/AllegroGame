@@ -17,16 +17,20 @@ namespace sprite {
 		}
 		return ret;
 	}
+	
 	void draw_sprite(sprite_t &sprite, float x, float y, float rotation) {
 		if (rotation == 0.0) {
-			al_draw_bitmap(sprite.bitmap.get(), x, y, 0);
+			float dx = x - al_get_bitmap_width(sprite.bitmap.get())/2.0;
+			float dy = y - al_get_bitmap_height(sprite.bitmap.get())/2.0;
+			
+			al_draw_bitmap(sprite.bitmap.get(), dx, dy, 0);
 			return;
 		}
-		float cx = x + al_get_bitmap_width(sprite.bitmap.get())/2.0;
-		float cy = y + al_get_bitmap_height(sprite.bitmap.get())/2.0;
+		float cx = al_get_bitmap_width(sprite.bitmap.get())/2.0;
+		float cy = al_get_bitmap_height(sprite.bitmap.get())/2.0;
 		al_draw_rotated_bitmap(sprite.bitmap.get(),
 							   cx, cy,
-							   x, y,
+							   x, x,
 							   rotation,
 							   0);
 	}

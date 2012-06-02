@@ -23,6 +23,7 @@ namespace local_game_scene {
 	 struct should be enough. */
 	struct state_t {
 		sprite::sprite_t test;
+		float rot;
 	};
 	
 	//we're using a vector of shared_ptrs here. though we could
@@ -49,6 +50,7 @@ namespace local_game_scene {
 	
 	static void tick(double dt, size_t state_id) {
 		auto state = states[state_id];
+		state->rot += 0.01;
 	}
 	
 	static void draw(double dt, size_t state_id) {
@@ -59,7 +61,7 @@ namespace local_game_scene {
 		
 		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
 		col.g = 255;
-		sprite::draw_sprite(state->test, 100, 100, 0.0);
+		sprite::draw_sprite(state->test, 400, 300, state->rot);
 	}
 	
 	
