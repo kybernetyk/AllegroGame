@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		353B6CA515735F6300D0517A /* arma.png in Resources */ = {isa = PBXBuildFile; fileRef = 353B6CA415735F6300D0517A /* arma.png */; };
 		353B6CAA1573708A00D0517A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 353B6CA81573708A00D0517A /* camera.cpp */; };
+		358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDC31579EB8F00B2917C /* local_game_scene.cpp */; };
+		358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDCA1579ED4700B2917C /* input_manager.cpp */; };
 		35CB1EDB1572D1C2005ABBD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */; };
 		35CB1EE51572D1C2005ABBD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35CB1EE31572D1C2005ABBD9 /* InfoPlist.strings */; };
 		35CB1EE71572D1C2005ABBD9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1EE61572D1C2005ABBD9 /* main.cpp */; };
@@ -65,6 +67,10 @@
 		353B6CA415735F6300D0517A /* arma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arma.png; path = MyGame/arma.png; sourceTree = "<group>"; };
 		353B6CA81573708A00D0517A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		353B6CA91573708A00D0517A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		358ACDC31579EB8F00B2917C /* local_game_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = local_game_scene.cpp; sourceTree = "<group>"; };
+		358ACDC41579EB8F00B2917C /* local_game_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_game_scene.h; sourceTree = "<group>"; };
+		358ACDCA1579ED4700B2917C /* input_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_manager.cpp; sourceTree = "<group>"; };
+		358ACDCB1579ED4700B2917C /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
 		35CB1ED61572D1C2005ABBD9 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		35CB1EDD1572D1C2005ABBD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -126,6 +132,54 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
+		358ACDC11579EB7900B2917C /* Local Game Scene */ = {
+			isa = PBXGroup;
+			children = (
+				358ACDC31579EB8F00B2917C /* local_game_scene.cpp */,
+				358ACDC41579EB8F00B2917C /* local_game_scene.h */,
+			);
+			name = "Local Game Scene";
+			sourceTree = "<group>";
+		};
+		358ACDC61579ECFA00B2917C /* Input Manager */ = {
+			isa = PBXGroup;
+			children = (
+				358ACDCA1579ED4700B2917C /* input_manager.cpp */,
+				358ACDCB1579ED4700B2917C /* input_manager.h */,
+			);
+			name = "Input Manager";
+			sourceTree = "<group>";
+		};
+		358ACDC71579ED0A00B2917C /* Scene Manager */ = {
+			isa = PBXGroup;
+			children = (
+				35CB1F161572D63B005ABBD9 /* scene_manager.cpp */,
+				35CB1F171572D63B005ABBD9 /* scene_manager.h */,
+			);
+			name = "Scene Manager";
+			sourceTree = "<group>";
+		};
+		358ACDC81579ED1100B2917C /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
+				353B6CA71573707200D0517A /* Camera */,
+				358ACDC71579ED0A00B2917C /* Scene Manager */,
+				358ACDC61579ECFA00B2917C /* Input Manager */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		358ACDC91579ED2C00B2917C /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				358ACDC11579EB7900B2917C /* Local Game Scene */,
+				35CB1F1D1572DE22005ABBD9 /* Menu Scene */,
+				35CB1F191572D85E005ABBD9 /* Loading Scene */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
 		35CB1EC91572D175005ABBD9 = {
 			isa = PBXGroup;
 			children = (
@@ -177,13 +231,9 @@
 		35CB1EE01572D1C2005ABBD9 /* MyGame */ = {
 			isa = PBXGroup;
 			children = (
-				353B6CA71573707200D0517A /* Camera */,
-				35CB1F1D1572DE22005ABBD9 /* Menu Scene */,
-				35CB1F191572D85E005ABBD9 /* Loading Scene */,
+				358ACDC91579ED2C00B2917C /* Game */,
+				358ACDC81579ED1100B2917C /* Framework */,
 				35CB1EE11572D1C2005ABBD9 /* Supporting Files */,
-				35CB1F161572D63B005ABBD9 /* scene_manager.cpp */,
-				35CB1F171572D63B005ABBD9 /* scene_manager.h */,
-				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
 			);
 			path = MyGame;
 			sourceTree = "<group>";
@@ -286,6 +336,8 @@
 				35CB1F1C1572D86B005ABBD9 /* loading_scene.cpp in Sources */,
 				35CB1F201572DE34005ABBD9 /* menu_scene.cpp in Sources */,
 				353B6CAA1573708A00D0517A /* camera.cpp in Sources */,
+				358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */,
+				358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

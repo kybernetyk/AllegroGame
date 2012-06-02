@@ -32,6 +32,10 @@ namespace camera {
 		al_use_transform(&t);
 	}
 	
+	void reset() {
+		current_camera.x = current_camera.y = 0.0;
+	}
+	
 	const float x() {
 		return current_camera.x;
 	}

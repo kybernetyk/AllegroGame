@@ -12,6 +12,7 @@ namespace camera {
 	void translate_to(float x, float y);
 	void translate_by(float x, float y);
 	void apply();
+	void reset();
 	
 	const float x();
 	const float y();

@@ -7,10 +7,17 @@
 //
 
 #include "scene_manager.h"
+#include "camera.h"
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
 
 namespace scene_manager {
 	static scene next_scene;
 	static scene current_scene;
+	static ALLEGRO_TRANSFORM identity_transform;
+	
+
 
 	void set_scene(scene scene) {
 		next_scene = scene;
@@ -26,7 +33,8 @@ namespace scene_manager {
 			next_scene.tick_scene = nullptr;
 			
 			if (current_scene.init_scene)
-				current_scene.init_scene(); 
+				current_scene.init_scene();
+			camera::reset();
 		}
 
 		if (current_scene.tick_scene != nullptr)
@@ -34,7 +42,12 @@ namespace scene_manager {
 	}
 	
 	void draw(double dt) {
-		if (current_scene.draw_scene)
+		al_identity_transform(&identity_transform);
+		al_use_transform(&identity_transform);
+		al_clear_to_color(al_map_rgb(0,0,0));
+		camera::apply();
+		if (current_scene.draw_scene) {
 			current_scene.draw_scene(dt);
+		}
 	}
 }

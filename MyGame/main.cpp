@@ -5,7 +5,7 @@
 #include <functional>
 #include "scene_manager.h"
 #include "loading_scene.h"
-
+#include "input_manager.h"
 
 const float FPS = 60.0f;
 
@@ -27,7 +27,8 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "can't init primitives addons\n");
 		return -1;
 	}
-	
+	al_install_mouse();
+	al_install_keyboard();
 	al_init_image_addon();
 	
 	timer = al_create_timer(1.0 / FPS);
@@ -76,27 +77,44 @@ int main(int argc, char **argv) {
 	
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
+	al_register_event_source(event_queue, al_get_mouse_event_source());
+	al_register_event_source(event_queue, al_get_keyboard_event_source());
+
 	al_clear_to_color(al_map_rgb(0,0,0));
 	al_flip_display();
 	
 	scene_manager::set_scene(loading_scene::create());
 	
 	al_start_timer(timer);
-	
-	ALLEGRO_TRANSFORM T;
-	al_identity_transform(&T);
+	input_manager::init();
 
 	
 	for (;;) {
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 		
-		if(ev.type == ALLEGRO_EVENT_TIMER) {
+		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			redraw = true;
 			scene_manager::tick(1.0/FPS);
-		}
-		else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+		} else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			break;
+		} else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
+				  ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {
+			input_manager::set_mouse(ev.mouse.x, ev.mouse.y);
+		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+			if (ev.mouse.button == 1)
+				input_manager::set_left_button(true);
+			if (ev.mouse.button == 2)
+				input_manager::set_right_button(true);
+		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+			if (ev.mouse.button == 1)
+				input_manager::set_left_button(false);
+			if (ev.mouse.button == 2)
+				input_manager::set_right_button(false);
+		} else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
+			input_manager::set_key_pressed(ev.keyboard.keycode, false);
+		} else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+			input_manager::set_key_pressed(ev.keyboard.keycode, true);
 		}
 		
 		if(redraw && al_is_event_queue_empty(event_queue)) {
@@ -104,11 +122,6 @@ int main(int argc, char **argv) {
 			
 			// render a frame
 			al_set_target_bitmap(buffer);
-
-			al_identity_transform(&T);
-			al_use_transform(&T);
-			al_clear_to_color(al_map_rgb(0,0,0));
-
 			scene_manager::draw(1.0/FPS);
 
 			al_set_target_backbuffer(display);
