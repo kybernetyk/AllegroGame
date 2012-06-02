@@ -15,6 +15,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include "sprite.h"
 
 namespace menu_scene {
 	
@@ -24,11 +25,7 @@ namespace menu_scene {
 	 struct should be enough. */
 	struct state_t {
 		int foo = 0;
-		ALLEGRO_BITMAP *bmp;
-
-		~state_t() {
-			printf("state_t destroyed\n");
-		}
+		sprite::sprite_t sprite;
 	};
 	
 	//we're using a vector of shared_ptrs here. though we could
@@ -42,11 +39,8 @@ namespace menu_scene {
 	static void init(size_t state_id) {
 		auto state = states[state_id];
 		state->foo = 2;
+		state->sprite = sprite::create_sprite("arma.png");
 		
-		state->bmp = al_load_bitmap("arma.png");
-		if (!state->bmp) {
-			fprintf(stderr, "couldn't load arma.png!\n");
-		}
 	}
 
 	static void destroy(size_t state_id) {
@@ -63,7 +57,6 @@ namespace menu_scene {
 		
 		//calculate our world
 		state->foo++;
-		printf("menu scene tick: %f = %i\n", dt, state->foo);
 		camera::translate_by(0.5, 0.5);
 		
 		if (input_manager::left_button() ||
@@ -75,7 +68,6 @@ namespace menu_scene {
 	
 	static void draw(double dt, size_t state_id) {
 		auto state = states[state_id];
-		printf("drawing with foo %i\n", state->foo);
 
 		ALLEGRO_COLOR col = {.r = 255};
 		
@@ -83,7 +75,8 @@ namespace menu_scene {
 		col.g = 255;
 		
 		al_draw_filled_rounded_rectangle(300, 300, 340, 340, 8, 8, col);
-		al_draw_bitmap(state->bmp, 200, 200, 0);
+//		al_draw_bitmap(state->bmp, 200, 200, 0);
+		sprite::draw_sprite(state->sprite, 200, 200, 0);
 		
 		ALLEGRO_TRANSFORM T;
 		al_identity_transform(&T);

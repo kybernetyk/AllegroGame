@@ -11,6 +11,7 @@
 		353B6CAA1573708A00D0517A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 353B6CA81573708A00D0517A /* camera.cpp */; };
 		358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDC31579EB8F00B2917C /* local_game_scene.cpp */; };
 		358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDCA1579ED4700B2917C /* input_manager.cpp */; };
+		358ACDD01579F34C00B2917C /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDCE1579F34C00B2917C /* sprite.cpp */; };
 		35CB1EDB1572D1C2005ABBD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */; };
 		35CB1EE51572D1C2005ABBD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35CB1EE31572D1C2005ABBD9 /* InfoPlist.strings */; };
 		35CB1EE71572D1C2005ABBD9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35CB1EE61572D1C2005ABBD9 /* main.cpp */; };
@@ -71,6 +72,8 @@
 		358ACDC41579EB8F00B2917C /* local_game_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_game_scene.h; sourceTree = "<group>"; };
 		358ACDCA1579ED4700B2917C /* input_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_manager.cpp; sourceTree = "<group>"; };
 		358ACDCB1579ED4700B2917C /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
+		358ACDCE1579F34C00B2917C /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
+		358ACDCF1579F34C00B2917C /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; path = sprite.h; sourceTree = "<group>"; };
 		35CB1ED61572D1C2005ABBD9 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		35CB1EDD1572D1C2005ABBD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -163,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
+				358ACDCD1579F34000B2917C /* Sprite Manager */,
 				353B6CA71573707200D0517A /* Camera */,
 				358ACDC71579ED0A00B2917C /* Scene Manager */,
 				358ACDC61579ECFA00B2917C /* Input Manager */,
@@ -178,6 +182,15 @@
 				35CB1F191572D85E005ABBD9 /* Loading Scene */,
 			);
 			name = Game;
+			sourceTree = "<group>";
+		};
+		358ACDCD1579F34000B2917C /* Sprite Manager */ = {
+			isa = PBXGroup;
+			children = (
+				358ACDCE1579F34C00B2917C /* sprite.cpp */,
+				358ACDCF1579F34C00B2917C /* sprite.h */,
+			);
+			name = "Sprite Manager";
 			sourceTree = "<group>";
 		};
 		35CB1EC91572D175005ABBD9 = {
@@ -338,6 +351,7 @@
 				353B6CAA1573708A00D0517A /* camera.cpp in Sources */,
 				358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */,
 				358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */,
+				358ACDD01579F34C00B2917C /* sprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

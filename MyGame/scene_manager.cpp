@@ -7,6 +7,7 @@
 //
 
 #include "scene_manager.h"
+#include "input_manager.h"
 #include "camera.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -35,6 +36,7 @@ namespace scene_manager {
 			if (current_scene.init_scene)
 				current_scene.init_scene();
 			camera::reset();
+			input_manager::init();
 		}
 
 		if (current_scene.tick_scene != nullptr)
@@ -49,5 +51,11 @@ namespace scene_manager {
 		if (current_scene.draw_scene) {
 			current_scene.draw_scene(dt);
 		}
+	}
+	
+	void destroy() {
+		current_scene.destroy_scene();
+		scene dummy;
+		current_scene = dummy;
 	}
 }

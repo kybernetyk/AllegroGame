@@ -82,11 +82,11 @@ int main(int argc, char **argv) {
 
 	al_clear_to_color(al_map_rgb(0,0,0));
 	al_flip_display();
+	input_manager::init();
 	
 	scene_manager::set_scene(loading_scene::create());
 	
 	al_start_timer(timer);
-	input_manager::init();
 
 	
 	for (;;) {
@@ -131,7 +131,8 @@ int main(int argc, char **argv) {
 			al_flip_display();
 		}
 	}
-	
+	scene_manager::destroy();
+
 	al_destroy_timer(timer);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);

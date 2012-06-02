@@ -8,6 +8,7 @@
 
 #include "local_game_scene.h"
 #include "camera.h"
+#include "sprite.h"
 #include <vector>
 #include <memory>
 #include <allegro5/allegro.h>
@@ -21,7 +22,7 @@ namespace local_game_scene {
 	 most of the time one static module global state
 	 struct should be enough. */
 	struct state_t {
-
+		sprite::sprite_t test;
 	};
 	
 	//we're using a vector of shared_ptrs here. though we could
@@ -34,6 +35,7 @@ namespace local_game_scene {
 	
 	static void init(size_t state_id) {
 		auto state = states[state_id];
+		state->test = sprite::create_sprite("arma.png");
 	}
 	
 	static void destroy(size_t state_id) {
@@ -47,20 +49,17 @@ namespace local_game_scene {
 	
 	static void tick(double dt, size_t state_id) {
 		auto state = states[state_id];
-		
-		printf("local_game_scene::tick()\n");
-//		camera::translate_by(0.5, 0.5);
 	}
 	
 	static void draw(double dt, size_t state_id) {
 		auto state = states[state_id];
-		printf("drawing local_game_scene\n");
 		
 		camera::apply();		
 		ALLEGRO_COLOR col = {.r = 255};
 		
 		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
 		col.g = 255;
+		sprite::draw_sprite(state->test, 100, 100, 0.0);
 	}
 	
 	
