@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		353B6CA515735F6300D0517A /* arma.png in Resources */ = {isa = PBXBuildFile; fileRef = 353B6CA415735F6300D0517A /* arma.png */; };
 		353B6CAA1573708A00D0517A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 353B6CA81573708A00D0517A /* camera.cpp */; };
+		3588A5E7157A00A600F641F6 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3588A5E6157A00A600F641F6 /* Triangle.png */; };
 		358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDC31579EB8F00B2917C /* local_game_scene.cpp */; };
 		358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDCA1579ED4700B2917C /* input_manager.cpp */; };
 		358ACDD01579F34C00B2917C /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDCE1579F34C00B2917C /* sprite.cpp */; };
@@ -68,12 +69,13 @@
 		353B6CA415735F6300D0517A /* arma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arma.png; path = MyGame/arma.png; sourceTree = "<group>"; };
 		353B6CA81573708A00D0517A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		353B6CA91573708A00D0517A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		3588A5E6157A00A600F641F6 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle.png; sourceTree = "<group>"; };
 		358ACDC31579EB8F00B2917C /* local_game_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = local_game_scene.cpp; sourceTree = "<group>"; };
 		358ACDC41579EB8F00B2917C /* local_game_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_game_scene.h; sourceTree = "<group>"; };
 		358ACDCA1579ED4700B2917C /* input_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_manager.cpp; sourceTree = "<group>"; };
 		358ACDCB1579ED4700B2917C /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
 		358ACDCE1579F34C00B2917C /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
-		358ACDCF1579F34C00B2917C /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; path = sprite.h; sourceTree = "<group>"; };
+		358ACDCF1579F34C00B2917C /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
 		35CB1ED61572D1C2005ABBD9 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		35CB1EDD1572D1C2005ABBD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -254,6 +256,7 @@
 		35CB1EE11572D1C2005ABBD9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3588A5E6157A00A600F641F6 /* Triangle.png */,
 				35CB1EE21572D1C2005ABBD9 /* MyGame-Info.plist */,
 				35CB1EE31572D1C2005ABBD9 /* InfoPlist.strings */,
 				35CB1EE81572D1C2005ABBD9 /* MyGame-Prefix.pch */,
@@ -334,6 +337,7 @@
 				35CB1EE51572D1C2005ABBD9 /* InfoPlist.strings in Resources */,
 				35CB1EEB1572D1C2005ABBD9 /* Credits.rtf in Resources */,
 				353B6CA515735F6300D0517A /* arma.png in Resources */,
+				3588A5E7157A00A600F641F6 /* Triangle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

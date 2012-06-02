@@ -36,7 +36,7 @@ namespace local_game_scene {
 	
 	static void init(size_t state_id) {
 		auto state = states[state_id];
-		state->test = sprite::create_sprite("arma.png");
+		state->test = sprite::create_sprite("Triangle.png");
 	}
 	
 	static void destroy(size_t state_id) {
@@ -51,6 +51,7 @@ namespace local_game_scene {
 	static void tick(double dt, size_t state_id) {
 		auto state = states[state_id];
 		state->rot += 0.01;
+		printf("rot: %f\n", state->rot);
 	}
 	
 	static void draw(double dt, size_t state_id) {
