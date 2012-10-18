@@ -23,6 +23,7 @@
 		356AB96416302A8A00177EFB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356AB96316302A8A00177EFB /* CoreFoundation.framework */; };
 		356AB96616302A9800177EFB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356AB96516302A9800177EFB /* IOKit.framework */; };
 		356AB96816302AC600177EFB /* READ THIS IF BUILD FAILS in Resources */ = {isa = PBXBuildFile; fileRef = 356AB96716302AC600177EFB /* READ THIS IF BUILD FAILS */; };
+		356AB96A16302B4400177EFB /* README in Resources */ = {isa = PBXBuildFile; fileRef = 356AB96916302B4400177EFB /* README */; };
 		3588A5E7157A00A600F641F6 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3588A5E6157A00A600F641F6 /* Triangle.png */; };
 		358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDC31579EB8F00B2917C /* local_game_scene.cpp */; };
 		358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358ACDCA1579ED4700B2917C /* input_manager.cpp */; };
@@ -66,6 +67,7 @@
 		356AB96316302A8A00177EFB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		356AB96516302A9800177EFB /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		356AB96716302AC600177EFB /* READ THIS IF BUILD FAILS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "READ THIS IF BUILD FAILS"; sourceTree = "<group>"; };
+		356AB96916302B4400177EFB /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3588A5E6157A00A600F641F6 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle.png; sourceTree = "<group>"; };
 		358ACDC31579EB8F00B2917C /* local_game_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = local_game_scene.cpp; sourceTree = "<group>"; };
 		358ACDC41579EB8F00B2917C /* local_game_scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local_game_scene.h; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		35CB1EC91572D175005ABBD9 = {
 			isa = PBXGroup;
 			children = (
+				356AB96916302B4400177EFB /* README */,
 				356AB96716302AC600177EFB /* READ THIS IF BUILD FAILS */,
 				35CB1EE01572D1C2005ABBD9 /* MyGame */,
 				35CB1ED91572D1C2005ABBD9 /* Frameworks */,
@@ -330,6 +333,7 @@
 				353B6CA515735F6300D0517A /* arma.png in Resources */,
 				3588A5E7157A00A600F641F6 /* Triangle.png in Resources */,
 				356AB96816302AC600177EFB /* READ THIS IF BUILD FAILS in Resources */,
+				356AB96A16302B4400177EFB /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

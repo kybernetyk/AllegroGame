@@ -1,0 +1,11 @@
+==== Allegro Game ====
+
+This is a little dummy XCode stub project with simplistic scene management to create games with Allegro 5.0
+
+It needs static Allegro 5.0 libraries in /usr/local/lib
+
+Read 'READ THIS IF BUILD FAILS' for installation instructions
+
+
+Licensed under GPL3 by Leon Szpilewski
+http://www.celestialmachines.com
