@@ -17,6 +17,7 @@ namespace sprite {
 	};
 	
 	sprite_t create_sprite(std::string filename);
+	void destroy_sprite(sprite_t &sprite);
 	void draw_sprite(sprite_t &sprite, float x, float y, float rotation);
 
 }

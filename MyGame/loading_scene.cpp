@@ -45,6 +45,7 @@ namespace loading_scene {
 	static void draw(double dt) {
 		printf("drawing loading_scene!\n");
 	}
+	
 	scene_manager::scene create() {
 		scene_manager::scene scene;
 		scene.init_scene = init_scene;

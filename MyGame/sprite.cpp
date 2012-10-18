@@ -34,4 +34,8 @@ namespace sprite {
 							   rotation,
 							   0);
 	}
+	
+	void destroy_sprite(sprite_t &sprite) {
+		sprite.bitmap = nullptr;
+	}
 }

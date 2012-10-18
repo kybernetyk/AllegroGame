@@ -31,32 +31,23 @@ namespace local_game_scene {
 	//makes it difficult as all ids following the removed
 	//state would be invalid. thus we use a shared_ptr
 	//that we set to nullptr to trigger object destruction
-	std::vector <std::shared_ptr<state_t>> states;
+	std::vector <std::shared_ptr<state_t>> g_states;
 	
 	
-	static void init(size_t state_id) {
-		auto state = states[state_id];
+	static void init(std::shared_ptr<state_t> state) {
 		state->test = sprite::create_sprite("Triangle.png");
 	}
 	
-	static void destroy(size_t state_id) {
-		//destroy scene at index i
-		//this will be cumbersome with an vector
-		//maybe get an array with N slots and mark as free
-		//or whatever. states should be pretty small
-		//so we can ignore this.
-		states[state_id] = nullptr;
+	static void destroy(std::shared_ptr<state_t> state) {
+		sprite::destroy_sprite(state->test); //actually not needed because sprites get auto destroyed due to RAII but that's to show how to dealloc sprites if needed
 	}
 	
-	static void tick(double dt, size_t state_id) {
-		auto state = states[state_id];
+	static void tick(double dt, std::shared_ptr<state_t> state) {
 		state->rot += 0.01;
 		printf("rot: %f\n", state->rot);
 	}
 	
-	static void draw(double dt, size_t state_id) {
-		auto state = states[state_id];
-		
+	static void draw(double dt, std::shared_ptr<state_t> state) {
 		camera::apply();		
 		ALLEGRO_COLOR col = {.r = 255};
 		
@@ -69,25 +60,29 @@ namespace local_game_scene {
 	scene_manager::scene create() {
 		scene_manager::scene scene;
 		state_t state;
-		states.push_back(std::make_shared<state_t>(state));
-		size_t i = states.size()-1;
+		g_states.push_back(std::make_shared<state_t>(state));
+		size_t i = g_states.size()-1;
 		
 		scene.init_scene = [i]() {
-			init(i);
+			auto state = g_states[i];
+			init(state);
 		};
 		
 		scene.destroy_scene = [i]() {
-			destroy(i);
+			auto state = g_states[i];
+			destroy(state);
+			g_states[i] = nullptr;
 		};
 		
 		scene.tick_scene = [i](double dt) {
-			tick(dt, i);
+			auto state = g_states[i];
+			tick(dt, state);
 		};
 		
 		scene.draw_scene = [i](double dt) {
-			draw(dt, i);
+			auto state = g_states[i];
+			draw(dt, state);
 		};
-		
 		
 		return scene;
 	}
