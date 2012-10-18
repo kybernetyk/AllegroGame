@@ -1,0 +1,13 @@
+If build fails you most probably don't have Allegro 5 installed.
+This project expects Allegro 5 static libraries in /usr/local/lib and Allegro 5 headers in /usr/local/include
+
+To install do this:
+
+svn checkout https://alleg.svn.sourceforge.net/svnroot/alleg/allegro/branches/5.0 allegro
+cd allegro
+mkdir build
+cd build
+cmake -DSHARED=off ..
+make
+sudo make install
+
