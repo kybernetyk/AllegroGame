@@ -27,8 +27,15 @@ namespace local_game_scene {
 		float z;
 	};
 	
+	struct rect_t {
+		float x;
+		float y;
+		float w;
+		float h;
+	};
+	
 	/* example of having distinct states for each scene
-	 instance. this shouldn't be neccessary too often - 
+	 instance. this shouldn't be neccessary too often -
 	 most of the time one static module global state
 	 struct should be enough. */
 	struct state_t {
@@ -37,14 +44,13 @@ namespace local_game_scene {
 		float player_x = 0.0;
 		float player_y = 0.0;
 		float player_speed = 0.0;
-		float player_vx = 0.0;
-		float player_vy = 0.0;
 		
 		float crosshair_x = 0.0;
 		float crosshair_y = 0.0;
 		
 		float world_x = 0.0;
 		float world_y = 0.0;
+		rect_t visible_world_rect;
 		
 		star_t stars[255];
 		
@@ -73,48 +79,37 @@ namespace local_game_scene {
 	
 	static void handle_user_input(double dt, std::shared_ptr<state_t> state) {
 		if (input_manager::key_pressed(ALLEGRO_KEY_W)) {
-
-			float speed = 3.0 * dt;
-			
-			state->player_vy += speed * cos((M_PI/180.0)*state->player_rot);
-			state->player_vx += -speed * sin((M_PI/180.0)*state->player_rot);
-			
-			if (state->player_vy > 3.0)
-				state->player_vy = 3.0;
-			if (state->player_vx > 3.0)
-				state->player_vx = 3.0;
-			if (state->player_vy < -3.0)
-				state->player_vy = -3.0;
-			if (state->player_vx < -3.0)
-				state->player_vx = -3.0;
-			
-
+			state->player_speed += 100.0 * dt;
+			if (state->player_speed > 100.0)
+				state->player_speed = 100.0;
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_A)) {
 			state->player_rot += dt * 90.0;
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_S)) {
-			state->player_speed -= 25.0 * dt;
+			state->player_speed -= 100.0 * dt;
 			if (state->player_speed < -25.0)
 				state->player_speed = -25.0;
-			
-			float speed = state->player_speed * dt;
-			state->player_vy += speed * cos((M_PI/180.0)*state->player_rot);
-			state->player_vx += speed * sin((M_PI/180.0)*state->player_rot);
-
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_D)) {
 			state->player_rot -= dt * 90.0;
 		}
 		
 	}
-
+	
 	
 	static void tick(double dt, std::shared_ptr<state_t> state) {
 		handle_user_input(dt, state);
-
+		
 		state->world_x = state->player_x;
 		state->world_y = state->player_y;
+		
+		state->visible_world_rect = rect_t{
+			.x = state->world_x - SCREEN_W/2,
+			.y = state->world_y - SCREEN_H/2,
+			.w = SCREEN_W,
+			.h = SCREEN_H
+		};
 		
 		auto x = state->player_x;
 		auto y = state->player_y;
@@ -126,9 +121,9 @@ namespace local_game_scene {
 		
 		state->crosshair_x = x;
 		state->crosshair_y = y;
-
+		
 		printf("mouse x: %f, mouse y: %f\n", x,y);
-
+		
 		camera::translate_to(state->world_x, state->world_y);
 		
 		if (state->player_speed > 0.0) {
@@ -138,30 +133,40 @@ namespace local_game_scene {
 			state->player_speed += dt * 25.0;
 		}
 		
-
-		state->player_x += state->player_vx;
-		state->player_y += state->player_vy;
+		float speed = state->player_speed * dt;
+		printf("speed: %f m/s\n", state->player_speed);
+		state->player_y += speed * cos((M_PI/180.0)*state->player_rot);
+		state->player_x -= speed * sin((M_PI/180.0)*state->player_rot);
+		
+	}
+	
+	static bool is_star_inside_rect(star_t &s, rect_t &r) {
+		return (s.x >= r.x &&
+				s.x <= r.x + r.w &&
+				s.y >= r.y &&
+				s.y <= r.y + r.h);
 	}
 	
 	static void draw_stars(double dt, std::shared_ptr<state_t> state) {
 		for (auto &p : state->stars) {
-			ALLEGRO_COLOR col = ALLEGRO_COLOR{255/p.z,255/p.z,255/p.z};
-
-			al_draw_filled_circle(p.x, p.y, p.z, col);
+			if (is_star_inside_rect(p, state->visible_world_rect)) {
+				ALLEGRO_COLOR col = ALLEGRO_COLOR{255/p.z,255/p.z,255/p.z,255};
+				al_draw_filled_circle(p.x, p.y, p.z, col);
+			}
 		}
 	}
 	
 	static void draw(double dt, std::shared_ptr<state_t> state) {
-		camera::apply();		
+		camera::apply();
 		draw_stars(dt, state);
 		
-		ALLEGRO_COLOR col = {.r = 255};
+		ALLEGRO_COLOR col = {.r = 255,.a = 255};
 		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
-
+		
 		col.g = 255;
 		sprite::draw_sprite(state->player_sprite, state->player_x, state->player_y, state->player_rot);
 		
-		al_draw_circle(state->crosshair_x, state->crosshair_y, 16.0, ALLEGRO_COLOR{.r=255}, 4.0);
+		al_draw_circle(state->crosshair_x, state->crosshair_y, 16.0, ALLEGRO_COLOR{.r=255, .a = 255}, 4.0);
 		
 		//al_draw_filled_circle(300, 400, 50, ALLEGRO_COLOR {.r = 129, .b = 255});
 	}
