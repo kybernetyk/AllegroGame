@@ -19,10 +19,13 @@
 #include <math.h>
 
 namespace local_game_scene {
-	
-	struct star_t {
+	struct vector_t {
 		float x;
 		float y;
+	};
+	
+	struct star_t {
+		vector_t pos;
 		float r;
 		float z;
 	};
@@ -34,25 +37,31 @@ namespace local_game_scene {
 		float h;
 	};
 	
-	/* example of having distinct states for each scene
-	 instance. this shouldn't be neccessary too often -
-	 most of the time one static module global state
-	 struct should be enough. */
+	struct orientation_t {
+		vector_t pos;
+		vector_t vel;
+		float speed;
+		float rot;
+	};
+	
+	struct ship_t {
+		orientation_t orientation;
+		sprite::sprite_t sprite;
+	};
+	
+	struct player_t {
+		ship_t ship;
+		vector_t crosshair_pos;
+		int xp;
+	};
+	
 	struct state_t {
-		sprite::sprite_t player_sprite;
-		float player_rot = 0;
-		float player_x = 0.0;
-		float player_y = 0.0;
-		float player_speed = 0.0;
+		player_t player;
 		
-		float crosshair_x = 0.0;
-		float crosshair_y = 0.0;
+		vector_t world_pos = {0,0};
+		rect_t visible_world_rect = {0,0,SCREEN_W,SCREEN_W};
 		
-		float world_x = 0.0;
-		float world_y = 0.0;
-		rect_t visible_world_rect;
-		
-		star_t stars[255];
+		star_t stars[255] = {};
 		
 	};
 	
@@ -65,93 +74,93 @@ namespace local_game_scene {
 	
 	
 	static void init(std::shared_ptr<state_t> state) {
-		state->player_sprite = sprite::create_sprite("Triangle.png");
+		state->player.ship.sprite = sprite::create_sprite("Triangle.png");
 		
 		for (int i = 0; i < 255; i++) {
-			state->stars[i] = star_t {.x = static_cast<float>(rand() % 1000), .y = static_cast<float>(rand() % 1000), .r = static_cast<float>(rand()%4), .z = static_cast<float>(rand() % 3)};
+			state->stars[i] = star_t {.pos = vector_t{static_cast<float>(rand() % 1000), static_cast<float>(rand() % 1000)},
+									  .r = static_cast<float>(rand()%4),
+									  .z = static_cast<float>(rand() % 3)};
 		}
 	}
 	
 	static void destroy(std::shared_ptr<state_t> state) {
-		sprite::destroy_sprite(state->player_sprite); //actually not needed because sprites get auto destroyed due to RAII but that's to show how to dealloc sprites if needed
+		sprite::destroy_sprite(state->player.ship.sprite); //actually not needed because sprites get auto destroyed due to RAII but that's to show how to dealloc sprites if needed
 	}
 	
 	
 	static void handle_user_input(double dt, std::shared_ptr<state_t> state) {
 		if (input_manager::key_pressed(ALLEGRO_KEY_W)) {
-			state->player_speed += 100.0 * dt;
-			if (state->player_speed > 100.0)
-				state->player_speed = 100.0;
+			state->player.ship.orientation.speed += 100.0 * dt;
+			if (state->player.ship.orientation.speed > 100.0)
+				state->player.ship.orientation.speed = 100.0;
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_A)) {
-			state->player_rot += dt * 90.0;
+			state->player.ship.orientation.rot += dt * 90.0;
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_S)) {
-			state->player_speed -= 100.0 * dt;
-			if (state->player_speed < -25.0)
-				state->player_speed = -25.0;
+			state->player.ship.orientation.speed -= 100.0 * dt;
+			if (state->player.ship.orientation.speed < -25.0)
+				state->player.ship.orientation.speed= -25.0;
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_D)) {
-			state->player_rot -= dt * 90.0;
+			state->player.ship.orientation.rot -= dt * 90.0;
 		}
 		
+	}
+	
+	static void update_player(double dt, std::shared_ptr<state_t> state) {
+		auto x = input_manager::mouse_x() + state->world_pos.x;
+		auto y = input_manager::mouse_y() + state->world_pos.y;
+		
+		state->player.crosshair_pos.x = x;
+		state->player.crosshair_pos.y = y;
+		
+		printf("mouse x: %f, mouse y: %f\n", x,y);
+		
+		if (state->player.ship.orientation.speed > 0.0) {
+			state->player.ship.orientation.speed -= dt * 25.0;
+		}
+		if (state->player.ship.orientation.speed < 0.0) {
+			state->player.ship.orientation.speed += dt * 25.0;
+		}
+		
+		float speed = state->player.ship.orientation.speed * dt;
+		printf("speed: %f m/s\n", state->player.ship.orientation.speed);
+		state->player.ship.orientation.pos.x -= speed * sin((M_PI/180.0)*state->player.ship.orientation.rot);
+		state->player.ship.orientation.pos.y += speed * cos((M_PI/180.0)*state->player.ship.orientation.rot);
 	}
 	
 	
 	static void tick(double dt, std::shared_ptr<state_t> state) {
 		handle_user_input(dt, state);
 		
-		state->world_x = state->player_x;
-		state->world_y = state->player_y;
+		update_player(dt, state);
+		
+		state->world_pos.x = state->player.ship.orientation.pos.x;
+		state->world_pos.y = state->player.ship.orientation.pos.y;
 		
 		state->visible_world_rect = rect_t{
-			.x = state->world_x - SCREEN_W/2,
-			.y = state->world_y - SCREEN_H/2,
+			.x = state->world_pos.x - SCREEN_W/2,
+			.y = state->world_pos.y - SCREEN_H/2,
 			.w = SCREEN_W,
 			.h = SCREEN_H
 		};
-		
-		auto x = state->player_x;
-		auto y = state->player_y;
-		
-		printf("player x: %f, player y: %f\n", x,y);
-		
-		x = input_manager::mouse_x() + state->world_x;
-		y = input_manager::mouse_y() + state->world_y;
-		
-		state->crosshair_x = x;
-		state->crosshair_y = y;
-		
-		printf("mouse x: %f, mouse y: %f\n", x,y);
-		
-		camera::translate_to(state->world_x, state->world_y);
-		
-		if (state->player_speed > 0.0) {
-			state->player_speed -= dt * 25.0;
-		}
-		if (state->player_speed < 0.0) {
-			state->player_speed += dt * 25.0;
-		}
-		
-		float speed = state->player_speed * dt;
-		printf("speed: %f m/s\n", state->player_speed);
-		state->player_y += speed * cos((M_PI/180.0)*state->player_rot);
-		state->player_x -= speed * sin((M_PI/180.0)*state->player_rot);
-		
+
+		camera::translate_to(state->world_pos.x, state->world_pos.y);
 	}
 	
 	static bool is_star_inside_rect(star_t &s, rect_t &r) {
-		return (s.x >= r.x &&
-				s.x <= r.x + r.w &&
-				s.y >= r.y &&
-				s.y <= r.y + r.h);
+		return (s.pos.x >= r.x &&
+				s.pos.x <= r.x + r.w &&
+				s.pos.y >= r.y &&
+				s.pos.y <= r.y + r.h);
 	}
 	
 	static void draw_stars(double dt, std::shared_ptr<state_t> state) {
 		for (auto &p : state->stars) {
 			if (is_star_inside_rect(p, state->visible_world_rect)) {
 				ALLEGRO_COLOR col = ALLEGRO_COLOR{255/p.z,255/p.z,255/p.z,255};
-				al_draw_filled_circle(p.x, p.y, p.z, col);
+				al_draw_filled_circle(p.pos.x, p.pos.y, p.z, col);
 			}
 		}
 	}
@@ -164,9 +173,23 @@ namespace local_game_scene {
 		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
 		
 		col.g = 255;
-		sprite::draw_sprite(state->player_sprite, state->player_x, state->player_y, state->player_rot);
+		sprite::draw_sprite(state->player.ship.sprite,
+							state->player.ship.orientation.pos.x,
+							state->player.ship.orientation.pos.y,
+							state->player.ship.orientation.rot);
 		
-		al_draw_circle(state->crosshair_x, state->crosshair_y, 16.0, ALLEGRO_COLOR{.r=255, .a = 255}, 4.0);
+		al_draw_circle(state->player.crosshair_pos.x, state->player.crosshair_pos.y, 16.0, ALLEGRO_COLOR{.r=255, .a = 255}, 2.0);
+		al_draw_line(state->player.crosshair_pos.x - 16.0,
+					 state->player.crosshair_pos.y,
+					 state->player.crosshair_pos.x + 16.0,
+					 state->player.crosshair_pos.y,
+					 col, 2.0);
+		al_draw_line(state->player.crosshair_pos.x,
+					 state->player.crosshair_pos.y - 16.0,
+					 state->player.crosshair_pos.x,
+					 state->player.crosshair_pos.y + 16.0,
+					 col, 2.0);
+		
 		
 		//al_draw_filled_circle(300, 400, 50, ALLEGRO_COLOR {.r = 129, .b = 255});
 	}
