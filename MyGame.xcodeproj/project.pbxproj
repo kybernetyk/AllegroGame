@@ -75,6 +75,7 @@
 		358ACDCB1579ED4700B2917C /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
 		358ACDCE1579F34C00B2917C /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		358ACDCF1579F34C00B2917C /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
+		35925EB316307B8F00CF0F81 /* sys_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sys_config.h; sourceTree = "<group>"; };
 		35CB1ED61572D1C2005ABBD9 /* MyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB1EDA1572D1C2005ABBD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		35CB1EDD1572D1C2005ABBD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -162,6 +163,7 @@
 				353B6CA71573707200D0517A /* Camera */,
 				358ACDC71579ED0A00B2917C /* Scene Manager */,
 				358ACDC61579ECFA00B2917C /* Input Manager */,
+				35925EB316307B8F00CF0F81 /* sys_config.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";

@@ -7,6 +7,7 @@
 //
 
 #include "sprite.h"
+#include "math.h"
 
 namespace sprite {
 	sprite_t create_sprite(std::string filename) {
@@ -19,18 +20,24 @@ namespace sprite {
 	}
 	
 	void draw_sprite(sprite_t &sprite, float x, float y, float rotation) {
-		if (rotation == 0.0) {
-			float dx = x - al_get_bitmap_width(sprite.bitmap.get())/2.0;
-			float dy = y - al_get_bitmap_height(sprite.bitmap.get())/2.0;
-			
-			al_draw_bitmap(sprite.bitmap.get(), dx, dy, 0);
-			return;
-		}
+		rotation += 180.0; //flip y
+
+		rotation = M_PI/180.0 * rotation;
+
+//		if (rotation == 0.0) {
+//			float dx = x - al_get_bitmap_width(sprite.bitmap.get())/2.0;
+//			float dy = y - al_get_bitmap_height(sprite.bitmap.get())/2.0;
+//			
+//			al_draw_bitmap(sprite.bitmap.get(), dx, dy, 0);
+//			return;
+//		}
+		
+
 		float cx = al_get_bitmap_width(sprite.bitmap.get())/2.0;
 		float cy = al_get_bitmap_height(sprite.bitmap.get())/2.0;
 		al_draw_rotated_bitmap(sprite.bitmap.get(),
 							   cx, cy,
-							   x, x,
+							   x, y,
 							   rotation,
 							   0);
 	}

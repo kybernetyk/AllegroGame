@@ -6,7 +6,7 @@
 #include "scene_manager.h"
 #include "loading_scene.h"
 #include "input_manager.h"
-
+#include "sys_config.h"
 const float FPS = 60.0f;
 
 
@@ -38,12 +38,12 @@ int main(int argc, char **argv) {
 	}
 	
 	//size of our window
-	float windowWidth = 800;
-	float windowHeight = 600;
+	float windowWidth = WINDOW_W;
+	float windowHeight = WINDOW_H;
 
 	//size of our screen. will be scaled to match window size
-	float screenWidth = 800;
-	float screenHeight = 600;
+	float screenWidth = SCREEN_W;
+	float screenHeight = SCREEN_H;
 	
 	// initialization
 //	al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
 			break;
 		} else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
 				  ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {
-			input_manager::set_mouse(ev.mouse.x, ev.mouse.y);
+			input_manager::set_mouse((ev.mouse.x*(1.0/scale))-SCREEN_W/2, ((windowHeight-ev.mouse.y)*(1.0/scale))-SCREEN_H/2);
 		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			if (ev.mouse.button == 1)
 				input_manager::set_left_button(true);

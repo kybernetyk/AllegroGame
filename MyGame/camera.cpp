@@ -7,6 +7,7 @@
 //
 
 #include "camera.h"
+#include "sys_config.h"
 #include <allegro5/allegro.h>
 
 namespace camera {
@@ -28,7 +29,14 @@ namespace camera {
 
 	void apply() {
 		ALLEGRO_TRANSFORM t;
-		al_build_transform(&t, -current_camera.x, -current_camera.y, 1.0, 1.0, 0.0);
+		al_identity_transform(&t);
+	
+		//al_build_transform(&t, -current_camera.x, -current_camera.y, 1.0, 1.0, 0.0);
+		//al_translate_transform(&t, 0, -current_camera.y);
+		al_translate_transform(&t, -current_camera.x + SCREEN_W/2, -current_camera.y+SCREEN_H/2);
+
+		al_scale_transform(&t, 1.0, -1.0);
+		al_translate_transform(&t, 0, SCREEN_H);
 		al_use_transform(&t);
 	}
 	
