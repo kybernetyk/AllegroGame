@@ -46,7 +46,6 @@ namespace scene_manager {
 	void draw(double dt) {
 		al_identity_transform(&identity_transform);
 		al_use_transform(&identity_transform);
-
 		al_clear_to_color(al_map_rgb(0,0,0));
 		camera::apply();
 		

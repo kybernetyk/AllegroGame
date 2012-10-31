@@ -306,7 +306,7 @@
 		35CB1ECB1572D175005ABBD9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 35CB1ECE1572D175005ABBD9 /* Build configuration list for PBXProject "MyGame" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -431,7 +431,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -469,7 +469,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

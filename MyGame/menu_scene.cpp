@@ -68,7 +68,7 @@ namespace menu_scene {
 	
 	static void draw(double dt, size_t state_id) {
 		auto state = states[state_id];
-
+		
 		ALLEGRO_COLOR col = {.r = 255};
 		
 		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
@@ -78,9 +78,6 @@ namespace menu_scene {
 //		al_draw_bitmap(state->bmp, 200, 200, 0);
 		sprite::draw_sprite(state->sprite, 200, 200, 0);
 		
-		ALLEGRO_TRANSFORM T;
-		al_identity_transform(&T);
-		al_use_transform(&T);
 	}
 	
 	

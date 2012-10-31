@@ -78,8 +78,8 @@ namespace local_game_scene {
 		
 		for (int i = 0; i < 255; i++) {
 			state->stars[i] = star_t {.pos = vector_t{static_cast<float>(rand() % 1000), static_cast<float>(rand() % 1000)},
-									  .r = static_cast<float>(rand()%4),
-									  .z = static_cast<float>(rand() % 3)};
+									  .r = static_cast<float>(rand()%2),
+				.z = static_cast<float>((3.0/(float)(rand()%3+1)))};
 		}
 	}
 	
@@ -91,8 +91,8 @@ namespace local_game_scene {
 	static void handle_user_input(double dt, std::shared_ptr<state_t> state) {
 		if (input_manager::key_pressed(ALLEGRO_KEY_W)) {
 			state->player.ship.orientation.speed += 100.0 * dt;
-			if (state->player.ship.orientation.speed > 100.0)
-				state->player.ship.orientation.speed = 100.0;
+			if (state->player.ship.orientation.speed > 200.0)
+				state->player.ship.orientation.speed = 200.0;
 		}
 		if (input_manager::key_pressed(ALLEGRO_KEY_A)) {
 			state->player.ship.orientation.rot += dt * 90.0;
@@ -159,26 +159,30 @@ namespace local_game_scene {
 	static void draw_stars(double dt, std::shared_ptr<state_t> state) {
 		for (auto &p : state->stars) {
 			if (is_star_inside_rect(p, state->visible_world_rect)) {
-				ALLEGRO_COLOR col = ALLEGRO_COLOR{255/p.z,255/p.z,255/p.z,255};
-				al_draw_filled_circle(p.pos.x, p.pos.y, p.z, col);
+				ALLEGRO_COLOR col = ALLEGRO_COLOR{static_cast<float>(1.0/p.z),static_cast<float>(1.0/p.z),static_cast<float>(1.0/p.z),1.0};
+				al_draw_filled_circle(p.pos.x, p.pos.y, p.r, col);
 			}
 		}
 	}
 	
+	static void draw_hud(double dt, std::shared_ptr<state_t> state) {
+		al_draw_filled_rectangle(0, 0, SCREEN_W, 100, ALLEGRO_COLOR {0.1,0.1,0.1, .a = 0.2});
+	}
+	
 	static void draw(double dt, std::shared_ptr<state_t> state) {
-		camera::apply();
 		draw_stars(dt, state);
 		
-		ALLEGRO_COLOR col = {.r = 255,.a = 255};
+		ALLEGRO_COLOR col = {.r = 1.0,.a = 1.0};
 		al_draw_filled_rectangle(0.0, 0.0, 100.0, 100.0, col);
 		
-		col.g = 255;
+		col = ALLEGRO_COLOR{.r= 1.0, .a = 1.0};
+		
 		sprite::draw_sprite(state->player.ship.sprite,
 							state->player.ship.orientation.pos.x,
 							state->player.ship.orientation.pos.y,
 							state->player.ship.orientation.rot);
 		
-		al_draw_circle(state->player.crosshair_pos.x, state->player.crosshair_pos.y, 16.0, ALLEGRO_COLOR{.r=255, .a = 255}, 2.0);
+		al_draw_circle(state->player.crosshair_pos.x, state->player.crosshair_pos.y, 16.0, col, 2.0);
 		al_draw_line(state->player.crosshair_pos.x - 16.0,
 					 state->player.crosshair_pos.y,
 					 state->player.crosshair_pos.x + 16.0,
@@ -191,7 +195,8 @@ namespace local_game_scene {
 					 col, 2.0);
 		
 		
-		//al_draw_filled_circle(300, 400, 50, ALLEGRO_COLOR {.r = 129, .b = 255});
+		camera::apply_identity();
+		draw_hud(dt, state);
 	}
 	
 	
