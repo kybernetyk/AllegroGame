@@ -36,9 +36,7 @@ namespace loading_scene {
 				printf("draw: %f\n", dt);
 			};
 			 */
-			
-			scene_manager::set_scene(menu_scene::create());
-			
+			cm::scene_manager::set_scene(menu_scene::create());
 		}
 	}
 	
@@ -46,8 +44,8 @@ namespace loading_scene {
 		printf("drawing loading_scene!\n");
 	}
 	
-	scene_manager::scene create() {
-		scene_manager::scene scene;
+	cm::scene_t create() {
+		cm::scene_t scene;
 		scene.init_scene = init_scene;
 		scene.tick_scene = do_scene;
 		scene.draw_scene = draw;

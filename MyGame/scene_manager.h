@@ -12,18 +12,19 @@
 #include <iostream>
 #include <functional>
 
-namespace scene_manager {
-	struct scene {
+namespace cm {
+	struct scene_t {
 		std::function<void()> init_scene = nullptr;
 		std::function<void()> destroy_scene = nullptr;
 		std::function<void(double)> tick_scene = nullptr;
 		std::function<void(double)> draw_scene = nullptr;
 	};
-	
-	void set_scene(scene next_scene);
-	void tick(double dt);
-	void draw(double dt);
-	void destroy();
-}
 
+	namespace scene_manager {
+		void set_scene(scene_t next_scene);
+		void tick(double dt);
+		void draw(double dt);
+		void destroy();
+	}
+}
 #endif /* defined(__MyGame__scene_manager__) */

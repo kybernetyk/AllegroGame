@@ -11,7 +11,7 @@
 #include "scene_manager.h"
 
 namespace local_game_scene {
-	scene_manager::scene create();
+	cm::scene_t create();
 }
 
 #endif /* defined(__MyGame__local_game_scene__) */

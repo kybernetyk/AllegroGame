@@ -10,16 +10,16 @@
 #define __MyGame__sprite_manager__
 #include <allegro5/allegro.h>
 #include <string>
-
-namespace sprite {
+namespace cm {
 	struct sprite_t {
 		std::shared_ptr<ALLEGRO_BITMAP> bitmap;
 	};
-	
-	sprite_t create_sprite(std::string filename);
-	void destroy_sprite(sprite_t &sprite);
-	void draw_sprite(sprite_t &sprite, float x, float y, float rotation);
 
+	namespace sprite {
+		sprite_t create_sprite(std::string filename);
+		void destroy_sprite(sprite_t &sprite);
+		void draw_sprite(sprite_t &sprite, float x, float y, float rotation);
+		void draw_sprite(sprite_t &sprite, float x, float y);
+	}
 }
-
 #endif /* defined(__MyGame__sprite_manager__) */

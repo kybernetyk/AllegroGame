@@ -13,7 +13,7 @@
 #include "scene_manager.h"
 
 namespace loading_scene {
-	scene_manager::scene create();	
+	cm::scene_t create();
 }
 
 #endif /* defined(__MyGame__loading_scene__) */

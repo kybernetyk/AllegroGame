@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3508F42316AC1E9800F24AF0 /* trig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3508F42116AC1E9800F24AF0 /* trig.cpp */; };
+		3508F42516AC214A00F24AF0 /* sys_config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3508F42416AC214A00F24AF0 /* sys_config.cpp */; };
 		353B6CA515735F6300D0517A /* arma.png in Resources */ = {isa = PBXBuildFile; fileRef = 353B6CA415735F6300D0517A /* arma.png */; };
 		353B6CAA1573708A00D0517A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 353B6CA81573708A00D0517A /* camera.cpp */; };
 		356AB957163029F800177EFB /* liballegro_acodec-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 356AB94D163029F800177EFB /* liballegro_acodec-static.a */; };
@@ -50,6 +52,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3508F42116AC1E9800F24AF0 /* trig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = trig.cpp; sourceTree = "<group>"; };
+		3508F42216AC1E9800F24AF0 /* trig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trig.h; sourceTree = "<group>"; };
+		3508F42416AC214A00F24AF0 /* sys_config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sys_config.cpp; sourceTree = "<group>"; };
 		353B6CA415735F6300D0517A /* arma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arma.png; sourceTree = "<group>"; };
 		353B6CA81573708A00D0517A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		353B6CA91573708A00D0517A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
@@ -119,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3508F41F16AC1E8000F24AF0 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				3508F42116AC1E9800F24AF0 /* trig.cpp */,
+				3508F42216AC1E9800F24AF0 /* trig.h */,
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
 		353B6CA71573707200D0517A /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,12 +172,14 @@
 		358ACDC81579ED1100B2917C /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				3508F41F16AC1E8000F24AF0 /* Types */,
 				35CB1EE61572D1C2005ABBD9 /* main.cpp */,
 				358ACDCD1579F34000B2917C /* Sprite Manager */,
 				353B6CA71573707200D0517A /* Camera */,
 				358ACDC71579ED0A00B2917C /* Scene Manager */,
 				358ACDC61579ECFA00B2917C /* Input Manager */,
 				35925EB316307B8F00CF0F81 /* sys_config.h */,
+				3508F42416AC214A00F24AF0 /* sys_config.cpp */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -354,6 +370,8 @@
 				358ACDC51579EB8F00B2917C /* local_game_scene.cpp in Sources */,
 				358ACDCC1579ED4700B2917C /* input_manager.cpp in Sources */,
 				358ACDD01579F34C00B2917C /* sprite.cpp in Sources */,
+				3508F42316AC1E9800F24AF0 /* trig.cpp in Sources */,
+				3508F42516AC214A00F24AF0 /* sys_config.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

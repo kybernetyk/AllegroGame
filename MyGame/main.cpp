@@ -38,12 +38,12 @@ int main(int argc, char **argv) {
 	}
 	
 	//size of our window
-	float windowWidth = WINDOW_W;
-	float windowHeight = WINDOW_H;
+	float windowWidth = cm::cfg::window_width;
+	float windowHeight = cm::cfg::window_height;;
 
 	//size of our screen. will be scaled to match window size
-	float screenWidth = SCREEN_W;
-	float screenHeight = SCREEN_H;
+	float screenWidth = cm::cfg::screen_width;
+	float screenHeight = cm::cfg::screen_height;
 	
 	// initialization
 //	al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
@@ -84,9 +84,9 @@ int main(int argc, char **argv) {
 
 	al_clear_to_color(al_map_rgb(0,0,0));
 	al_flip_display();
-	input_manager::init();
+	cm::input_manager::init();
 	
-	scene_manager::set_scene(loading_scene::create());
+	cm::scene_manager::set_scene(loading_scene::create());
 	
 	al_start_timer(timer);
 
@@ -97,26 +97,27 @@ int main(int argc, char **argv) {
 		
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			redraw = true;
-			scene_manager::tick(1.0/FPS);
+			cm::scene_manager::tick(1.0/FPS);
 		} else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			break;
 		} else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
 				  ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY) {
-			input_manager::set_mouse((ev.mouse.x*(1.0/scale))-SCREEN_W/2, ((windowHeight-ev.mouse.y)*(1.0/scale))-SCREEN_H/2);
+			cm::input_manager::set_mouse((ev.mouse.x*(1.0/scale))-screenWidth/2,
+										 ((windowHeight-ev.mouse.y)*(1.0/scale))-screenHeight/2);
 		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
 			if (ev.mouse.button == 1)
-				input_manager::set_left_button(true);
+				cm::input_manager::set_left_button(true);
 			if (ev.mouse.button == 2)
-				input_manager::set_right_button(true);
+				cm::input_manager::set_right_button(true);
 		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 			if (ev.mouse.button == 1)
-				input_manager::set_left_button(false);
+				cm::input_manager::set_left_button(false);
 			if (ev.mouse.button == 2)
-				input_manager::set_right_button(false);
+				cm::input_manager::set_right_button(false);
 		} else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
-			input_manager::set_key_pressed(ev.keyboard.keycode, false);
+			cm::input_manager::set_key_pressed(ev.keyboard.keycode, false);
 		} else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-			input_manager::set_key_pressed(ev.keyboard.keycode, true);
+			cm::input_manager::set_key_pressed(ev.keyboard.keycode, true);
 		}
 		
 		if(redraw && al_is_event_queue_empty(event_queue)) {
@@ -124,7 +125,7 @@ int main(int argc, char **argv) {
 			
 			// render a frame
 			al_set_target_bitmap(buffer);
-			scene_manager::draw(1.0/FPS);
+			cm::scene_manager::draw(1.0/FPS);
 
 			al_set_target_backbuffer(display);
 			al_clear_to_color(al_map_rgb(0, 128, 0));
@@ -133,7 +134,7 @@ int main(int argc, char **argv) {
 			al_flip_display();
 		}
 	}
-	scene_manager::destroy();
+	cm::scene_manager::destroy();
 
 	al_destroy_timer(timer);
 	al_destroy_display(display);

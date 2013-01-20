@@ -9,11 +9,13 @@
 #ifndef MyGame_sys_config_h
 #define MyGame_sys_config_h
 
-
-#define SCREEN_W 800
-#define SCREEN_H 600
-
-#define WINDOW_W 800
-#define WINDOW_H 600
-
+namespace cm {
+	namespace cfg {
+		extern int screen_width;
+		extern int screen_height;
+		
+		extern int window_width;
+		extern int window_height;
+	}
+}
 #endif

@@ -25,7 +25,7 @@ namespace menu_scene {
 	 struct should be enough. */
 	struct state_t {
 		int foo = 0;
-		sprite::sprite_t sprite;
+		cm::sprite_t sprite;
 	};
 	
 	//we're using a vector of shared_ptrs here. though we could
@@ -39,7 +39,7 @@ namespace menu_scene {
 	static void init(size_t state_id) {
 		auto state = states[state_id];
 		state->foo = 2;
-		state->sprite = sprite::create_sprite("arma.png");
+		state->sprite = cm::sprite::create_sprite("arma.png");
 		
 	}
 
@@ -57,12 +57,12 @@ namespace menu_scene {
 		
 		//calculate our world
 		state->foo++;
-		camera::translate_by(0.5, 0.5);
+		cm::camera::translate_by(0.5, 0.5);
 		
-		if (input_manager::left_button() ||
-			input_manager::key_pressed(ALLEGRO_KEY_SPACE)) {
+		if (cm::input_manager::left_button() ||
+			cm::input_manager::key_pressed(ALLEGRO_KEY_SPACE)) {
 			auto s = local_game_scene::create();
-			scene_manager::set_scene(s);
+			cm::scene_manager::set_scene(s);
 		}
 	}
 	
@@ -75,14 +75,12 @@ namespace menu_scene {
 		col.g = 255;
 		
 		al_draw_filled_rounded_rectangle(300, 300, 340, 340, 8, 8, col);
-//		al_draw_bitmap(state->bmp, 200, 200, 0);
-		sprite::draw_sprite(state->sprite, 200, 200, 0);
-		
+		cm::sprite::draw_sprite(state->sprite, 200, 200);		
 	}
 	
 	
-	scene_manager::scene create() {
-		scene_manager::scene scene;
+	cm::scene_t create() {
+		cm::scene_t scene;
 		state_t state;
 		state.foo = 23;
 		states.push_back(std::make_shared<state_t>(state));
@@ -103,8 +101,6 @@ namespace menu_scene {
 		scene.draw_scene = [i](double dt) {
 			draw(dt, i);
 		};
-		
-		
 		return scene;
 	}
 }
